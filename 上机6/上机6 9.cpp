@@ -6,7 +6,7 @@ int gcd(int a, int b) { // 计算两个数的最大公约数
 class Fraction {
     int p, q;
 public:
-Fraction(int x){
+    Fraction(int x){
         p=x;q=1;
     }
     Fraction(){ }
