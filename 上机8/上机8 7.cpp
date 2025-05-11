@@ -19,7 +19,6 @@ class C {
             return temp;
         }
         C():curr_value(0) {  }
-
 };
 int C::num = 0; 
 int main() {
