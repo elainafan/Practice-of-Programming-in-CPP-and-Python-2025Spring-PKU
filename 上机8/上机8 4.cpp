@@ -13,7 +13,7 @@ public:
         Midterm temp(val-x);
         return temp;
     }
-    Midterm operator++(){
+    Midterm& operator++(){
         val+=1;
         return *this;
     }
@@ -22,8 +22,12 @@ public:
         val++;
         return temp;
     }
-    Midterm operator-=(int x){
-        val-=(9*x);
+    Midterm& operator=(int num){
+        val=num;
+        return *this;
+    }
+    Midterm& operator-=(int x){
+        val-=x;
         return *this;
     }
     operator int(){
@@ -43,9 +47,11 @@ int main(){
   cout << ++b << endl;  //输出 n + 1 
   cout << b++ << endl; //输出 n + 1 
   ++b = n;  
+  cout<<b<<endl;
   Midterm c = 2 + b; 
   ((c -= 1) -= 2) -= 3;
   cout << c <<endl;  //输出n-4 
   cout << mean(n, c) << endl; //输出 n-2 
+  system("pause");
   return 0;
 }
