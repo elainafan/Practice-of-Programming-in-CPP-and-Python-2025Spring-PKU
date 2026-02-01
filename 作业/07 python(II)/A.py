@@ -1,9 +1,7 @@
 lst = input().split()
 n = int(lst[0])
 m = int(lst[1])
-kd = []
-for i in range(0, n):
-    kd.append([])
+kd = [[] for _ in range(n)]
 for i in range(0, n):
     x = input().split()
     for j in range(0, m):
