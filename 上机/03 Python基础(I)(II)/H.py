@@ -1,8 +1,7 @@
 n = int(input())
-ma = []
+ma = [[] for _ in range(n)]
 ans = 0
 for i in range(0, n):
-    ma.append([])
     k = input().split()
     for j in range(0, n):
         ma[i].append(int(k[j]))

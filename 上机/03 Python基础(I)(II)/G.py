@@ -1,15 +1,13 @@
 lst = input().split()
 n = int(lst[0])
 m = int(lst[1])
-a = []
-b = []
+a = [[] for _ in range(n)]
+b = [[] for _ in range(n)]
 for i in range(0, n):
-    a.append([])
     k = input().split()
     for j in range(0, m):
         a[i].append(int(k[j]))
 for i in range(0, n):
-    b.append([])
     k = input().split()
     for j in range(0, m):
         b[i].append(int(k[j]))
