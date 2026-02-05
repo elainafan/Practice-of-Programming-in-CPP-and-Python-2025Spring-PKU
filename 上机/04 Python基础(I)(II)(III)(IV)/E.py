@@ -54,10 +54,10 @@ for i in range(0, n):
     for j in range(0, len(t)):
         num += k * dict[t[j]]
         k *= p
-    if (num == 0):
+    if num == 0:
         print('0')
         continue
-    while (num > 0):
+    while num > 0:
         temp = num % q
         l.append(di[temp])
         num //= q
