@@ -3,31 +3,34 @@
 #define ull unsigned long long
 using namespace std;
 int n;
-multiset<int> ma;
-set<int> k;
+map<int, int> ma;
+map<int, int> ma2;
 string s;
 int x;
 int main() {
-    scanf("%d", &n);
+    cin.tie(nullptr)->sync_with_stdio(false);
+    cin >> n;
     for (int i = 1; i <= n; i++) {
         cin >> s >> x;
         if (s[1] == 'd') {
-            ma.insert(x);
-            k.insert(x);
-            cout << ma.count(x) << endl;
+            ma[x]++;
+            ma2[x]++;
+            cout << ma[x] << endl;
         } else if (s[1] == 'e') {
-            cout << ma.count(x) << endl;
-            auto it = ma.find(x);
-            while (it != ma.end()) {
-                ma.erase(it);
-                it = ma.find(x);
-            }
+            if (ma.count(x)) {
+                cout << ma[x] << endl;
+                ma.erase(ma.find(x));
+            } else
+                cout << 0 << endl;
         } else {
-            if (k.find(x) != k.end())
+            if (ma2.count(x)) {
                 cout << 1 << ' ';
-            else
-                cout << 0 << ' ';
-            cout << ma.count(x) << endl;
+                if (ma.count(x))
+                    cout << ma[x] << endl;
+                else
+                    cout << 0 << endl;
+            } else
+                cout << 0 << endl;
         }
     }
     system("pause");

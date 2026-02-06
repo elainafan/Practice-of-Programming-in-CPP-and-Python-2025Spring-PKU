@@ -12,7 +12,6 @@ template <class T>
 class myostream_iteraotr {
 private:
     ostream& ost;
-    T n;
     string k;
 
 public:

@@ -6,15 +6,16 @@ public:
     static int count;
     A(int x) { count++; }
     A() { count++; }
-    virtual ~A() { cout << "A::destructor" << endl; }
+    A(const A& other) { count++; }
+    virtual ~A() {
+        cout << "A::destructor" << endl;
+        count--;
+    }
 };
 class B : public A {
 public:
     B(int x) {}
-    ~B() {
-        if (count == 4) count--;
-        cout << "B::destructor" << endl;
-    }
+    ~B() { cout << "B::destructor" << endl; }
 };
 // 在此处补充你的代码
 int A::count = 0;
@@ -30,5 +31,6 @@ int main() {
     cout << A::count << endl;
     delete pa;
     cout << A::count << endl;
+    system("pause");
     return 0;
 }
