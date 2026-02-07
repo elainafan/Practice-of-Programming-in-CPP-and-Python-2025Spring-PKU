@@ -19,10 +19,6 @@ public:
     }
     vector<int>::iterator operator*() { return k.begin(); }
     int& operator[](int x) { return k[siz - x - 1]; }
-    void operator*=(int& k) {
-        k *= 2;
-        return;
-    }
     // 在此处补充你的代码
 };
 
