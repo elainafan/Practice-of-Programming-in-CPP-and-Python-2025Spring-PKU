@@ -9,23 +9,19 @@ public:
         o << "() called " << num << " times, sum is " << c.curr_value;
         return o;
     }
-    C(int x) {
-        num++;
-        curr_value = x;
+    friend ostream& operator<<(ostream& o, C&& c) {
+        o << "() called " << num << " times, sum is " << c.curr_value;
+        return o;
     }
     C() { curr_value = 0; }
-    C& operator()(int x) {
-        curr_value += x;
+    C(int x) : curr_value(x) {}
+    C operator()(int x) {
         num++;
-        return *this;
+        return C(curr_value + x);
     }
-    C& operator()(int x, int y) {
-        if (curr_value == 7 && !(x == 5 && y == 6))
-            curr_value += x + y;
-        else
-            curr_value = x + y;
+    C operator()(int x, int y) {
         num++;
-        return *this;
+        return C(curr_value + x + y);
     }
 };
 int C::num = 0;
@@ -36,5 +32,6 @@ int main() {
     cout << c1(5, 6)(7) << endl;
     C c2;
     cout << c2(7)(8, 9) << endl;
+    system("pause");
     return 0;
 }

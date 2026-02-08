@@ -10,7 +10,7 @@ private:
 public:
     MaxFinder(T* a, T* b) : x(a), y(b) {}
     T* getMax() {
-        T* p = new T;
+        T* p = new T();
         p = x;
         for (T* it = x + 1; it != y; it++) {
             if (pd(*p, *it)) p = it;
@@ -18,7 +18,8 @@ public:
         return p;
     }
     T* getMax(bool f(T x, T y)) {
-        T* p = new T;
+        T* p = new T();
+        p = x;
         for (T* it = x + 1; it != y; it++) {
             if (f(*p, *it)) p = it;
         }
@@ -26,7 +27,8 @@ public:
     }
     template <class T1>
     T* getMax(T1 t) {
-        T* p = new T;
+        T* p = new T();
+        p = x;
         for (T* it = x + 1; it != y; it++) {
             if (t(*p, *it)) p = it;
         }

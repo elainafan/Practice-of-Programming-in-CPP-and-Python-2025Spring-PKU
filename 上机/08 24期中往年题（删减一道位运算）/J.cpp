@@ -6,21 +6,16 @@
 #include <vector>
 
 using namespace std;
-template <class T, class Pred = void>
-struct Comparator;
-template <>
-struct Comparator<int> {
-    bool operator()(const int &a, const int &b) const { return a < b; }
+template <class T>
+struct Equal {
+    T operator()(const T& x) { return x; }
 };
-template <>
-struct Comparator<string> {
-    bool operator()(const string &a, const string &b) const { return a < b; }
-};
-template <class len>
-struct Comparator<string, len> {
-    bool operator()(const string &a, const string &b) const {
-        if (a.length() != b.length()) return a.length() < b.length();
-        return a < b;
+template <class T, class Pred = Equal<T>>
+struct Comparator {
+    Pred pd;
+    bool operator()(const T& a, const T& b) {
+        if (pd(a) == pd(b)) return a < b;
+        return pd(a) < pd(b);
     }
 };
 // 在此处补充你的代码
