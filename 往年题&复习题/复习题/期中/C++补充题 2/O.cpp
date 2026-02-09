@@ -7,12 +7,7 @@ private:
 
 public:
     A() { v = 1; }
-    void printV() {
-        if (v == 2)
-            cout << v << endl;
-        else
-            cout << ++v << endl;
-    }
+    void printV() { cout << v + 1 << endl; }
     void printV() const { cout << v << endl; }
     // 在此处补充你的代码
 };

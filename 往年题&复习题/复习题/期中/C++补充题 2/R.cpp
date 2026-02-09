@@ -6,9 +6,9 @@
 
 using namespace std;
 
-class MyMap : public map<string, int> {
+class MyMap {
 public:
-    map<int, vector<string>, greater<int>> ma;
+    map<int, vector<string>> ma;
     MyMap() { ma.clear(); }
     friend istream &operator>>(istream &is, MyMap &m) {
         string tem;
@@ -19,13 +19,14 @@ public:
         return is;
     }
     friend ostream &operator<<(ostream &os, MyMap &m) {
-        for (auto it = m.ma.begin(); it != m.ma.end(); it++) {
+        for (auto it = --(m.ma.end());; it--) {
             cout << it->first << ' ';
             sort(it->second.begin(), it->second.end());
             for (int j = 0; j < m.ma[it->first].size(); j++) {
                 cout << m.ma[it->first][j] << ' ';
             }
             cout << endl;
+            if (it == m.ma.begin()) break;
         }
         return os;
     }

@@ -9,12 +9,11 @@
 #include <string>
 #include <vector>
 
-
 using namespace std;
 typedef pair<string, int> PAIR;
 class MyMap : public map<string, int> {
 public:
-    map<int, vector<string>, greater<int>> ma;
+    map<int, set<pair<int, string>>> ma;
     map<string, int> fma;
     MyMap() {
         ma.clear();
@@ -27,19 +26,16 @@ public:
         is >> temp;
         if (other.fma.find(tem) == other.fma.end()) {
             other.fma[tem] = 1;
-            other.ma[temp].push_back(tem);
+            other.ma[temp].insert(make_pair(tem.size(), tem));
         }
         return is;
     }
     friend ostream &operator<<(ostream &os, MyMap &other) {
-        for (auto it = other.ma.begin(); it != other.ma.end(); it++) {
-            sort(it->second.begin(), it->second.end(), [](const string &x, const string &y) {
-                if (x.length() == y.length()) return x < y;
-                return x.length() < y.length();
-            });
-            for (int i = 0; i < other.ma[it->first].size(); i++) {
-                os << other.ma[it->first][i] << ' ' << it->first << endl;
+        for (auto it = --other.ma.end();; it--) {
+            for (auto itt = it->second.begin(); itt != it->second.end(); itt++) {
+                cout << (*itt).second << ' ' << it->first << endl;
             }
+            if (it == other.ma.begin()) break;
         }
         return os;
     }

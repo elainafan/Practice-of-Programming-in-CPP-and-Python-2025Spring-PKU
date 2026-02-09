@@ -37,7 +37,7 @@ int main() {
                 tem.push_back(make_pair(it->first, ans));
             }
         }
-        sort(tem.begin(), tem.end(), [](const pair<string, int> x, const pair<string, int> y) {
+        sort(tem.begin(), tem.end(), [&](const pair<string, int> x, const pair<string, int> y) {
             if (x.second == y.second) return x.first < y.first;
             return x.second > y.second;
         });

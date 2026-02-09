@@ -10,9 +10,7 @@ public:
     A(int x) { total++; }
     A(const A &other) { total++; }
     operator int() { return num; }
-    ~A() {
-        if (total != 8) total--;
-    }
+    ~A() { total--; }
     // 在此处补充你的代码
 };
 

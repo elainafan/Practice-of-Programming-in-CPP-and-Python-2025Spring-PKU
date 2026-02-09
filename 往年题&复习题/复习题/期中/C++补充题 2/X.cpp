@@ -8,32 +8,33 @@ struct Network {
 };
 class Computer {
 public:
-    bool zzl;  // 直接连
-    bool jzl;  // 间接连
-    int tot;
-    int &temp;
-    Computer(Network &s) : zzl(true), jzl(false), tot(0), temp(s.totalConnections) { s.totalConnections++; }
-    Computer(Computer &s) : zzl(s.zzl), jzl(s.jzl), tot(0), temp(s.temp) {
-        if (temp == 2) temp = 3;
-        s.tot++;
+    bool con;
+    Network* si;
+    Computer(Network& s) : con(true), si(&s) { s.totalConnections++; }
+    Computer(Computer& d) : con(d.con), si(d.si) {
+        if (d.si) d.si->totalConnections++;
+    }
+    void connect(Network& s) {
+        con = true;
+        si = &s;
+        s.totalConnections++;
     }
     void disConnect() {
-        zzl = false;
-        temp -= (tot + 1);
-        if (temp == 0) cout << "lostAllConnections" << endl;
+        con = false;
+        si->totalConnections--;
+        if (si->totalConnections == 0) si->lostAllConnections();
+        si = nullptr;
     }
-    void connect(Network &s) {
-        s.totalConnections += tot + 1;
-        jzl = true;
-    }
-    void operator=(Computer &s) {
-        zzl = true;
-        jzl = false;
-        s.tot--;
+    void operator=(const Computer& d) {
+        con = d.con;
+        si = d.si;
+        if (con) si->totalConnections++;
     }
     ~Computer() {
-        temp--;
-        if (temp == 0) cout << "lostAllConnections" << endl;
+        if (con && si) {
+            si->totalConnections--;
+            if (si && si->totalConnections == 0) si->lostAllConnections();
+        }
     }
     // 在此处补充你的代码
 };
@@ -47,7 +48,7 @@ int main() {
     c1.connect(net);
     c2 = c1;
     net.print();
-    Computer *pc3 = new Computer(c2);
+    Computer* pc3 = new Computer(c2);
     net.print();
     c1.disConnect();
     net.print();
@@ -56,4 +57,3 @@ int main() {
     system("pause");
     return 0;
 }
-// 难点是一个断了之后，直接链接和间接连接的都断了

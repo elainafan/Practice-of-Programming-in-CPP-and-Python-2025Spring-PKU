@@ -1,9 +1,10 @@
 #include <iostream>
 using namespace std;
 void print(unsigned int x) {
-    for (unsigned int y = 0;; y = (y - x) & x) {
-        cout << y << endl;
-        if (y == x) break;
+    for (unsigned int sub = x;; sub = (sub - 1) & x) {
+        unsigned int tem = sub ^ x;
+        cout << tem << endl;
+        if (sub == 0) break;
     }
     return;
     // 在此处补充你的代码
