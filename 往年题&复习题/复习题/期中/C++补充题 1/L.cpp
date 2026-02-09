@@ -6,23 +6,17 @@
 using namespace std;
 class CMean {
 private:
-    int& result;
+    int result;
     int num;
-    bool flag;
+    int& res;
 
 public:
-    CMean(int& t) : result(t), num(0), flag(true) {}
+    CMean(int& t) : result(t), num(0), res(t) {}
     void operator()(const auto& x) {
         result += x;
         num++;
+        res = result / num;
         return;
-    }
-    CMean(const CMean& other) : result(other.result), num(other.num), flag(false) {}
-    ~CMean() {
-        if (flag) {
-            result /= num;
-            flag = false;
-        }
     }
     // 在此处补充你的代码
 };

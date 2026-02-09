@@ -22,7 +22,9 @@ int main() {
             for (int j = i + 1; j < n; j++) {
                 int target = k - a[i] - a[j], min_count = 1;
                 if (s.find(target) != s.end()) {
-                    flag = true;
+                    if (target == a[i]) min_count++;
+                    if (target == a[j]) min_count++;
+                    if (min_count >= s.count(target)) flag = true;
                 }
                 // 在此处补充你的代码
             }

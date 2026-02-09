@@ -6,11 +6,9 @@ using namespace std;
 class CMy_add {
 private:
     int& result;
-    bool flag;
 
 public:
-    CMy_add(int& x) : result(x), flag(true) {}
-    CMy_add(const CMy_add& other) : result(other.result), flag(false) {}
+    CMy_add(int& x) : result(x) {}
     void operator()(int x) {
         result += (x & 1);
         result += ((x >> 1) & 1) * 2;

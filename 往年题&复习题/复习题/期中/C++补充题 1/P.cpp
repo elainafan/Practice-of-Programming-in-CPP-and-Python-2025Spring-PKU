@@ -1,46 +1,83 @@
+#include <algorithm>
 #include <iostream>
-#include <set>
+#include <iterator>
+#include <map>
+#include <string>
+
 using namespace std;
-class Rectangle {
+template <class T1, class T2, class Pred = greater<T1>>
+class MyMultimap {
+private:
+    multimap<T1, T2, Pred> k;
+
 public:
-    int l, w;
-    int c, s;
-    Rectangle(int a, int b) : l(a), w(b) {
-        c = 2 * (a + b);
-        s = a * b;
-    }
-    friend ostream &operator<<(ostream &os, const Rectangle &t) {
-        os << t.s << ' ' << t.c;
-        return os;
-    }
-    bool operator<(const Rectangle &k) const {
-        if (s == k.s) return c > k.c;
-        return s > k.s;
+    typedef typename multimap<T1, T2, Pred>::iterator iterator;
+    MyMultimap() { k.clear(); }
+    void insert(pair<T1, T2> a) { k.insert(a); }
+    auto begin() { return k.begin(); }
+    auto end() { return k.end(); }
+    void clear() { k.clear(); }
+    auto find(T1 x) { return k.find(x); }
+    void Set(T1 x, T2 y) {
+        for (auto it = k.begin(); it != k.end(); it++) {
+            if (it->first == x) it->second = y;
+        }
     }
 };
-struct Comp {
-    bool operator()(Rectangle a, Rectangle b) const {
-        if (a.c == b.c) return a.s < b.s;
-        return a.c < b.c;
-    }
-};
+template <class T1, class T2>
+ostream &operator<<(ostream &os, const pair<T1, T2> x) {
+    os << '(' << x.first << ',' << x.second << ')';
+    return os;
+}
 // 在此处补充你的代码
-int main() {
-    multiset<Rectangle> m1;
-    multiset<Rectangle, Comp> m2;
-    int n, a, b;
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> a >> b;
-        m1.insert(Rectangle(a, b));
-        m2.insert(Rectangle(a, b));
-    }
-    for (multiset<Rectangle>::iterator it = m1.begin(); it != m1.end(); it++) {
-        cout << *it << endl;
-    }
+struct Student {
+    string name;
+    int score;
+};
+template <class T>
+void Print(T first, T last) {
+    for (; first != last; ++first) cout << *first << ",";
     cout << endl;
-    for (multiset<Rectangle>::iterator it = m2.begin(); it != m2.end(); it++) {
-        cout << *it << endl;
+}
+int main() {
+    Student s[] = {{"Tom", 80}, {"Jack", 70}, {"Jone", 90}, {"Tom", 70}, {"Alice", 100}};
+
+    MyMultimap<string, int> mp;
+    for (int i = 0; i < 5; ++i) mp.insert(make_pair(s[i].name, s[i].score));
+    Print(mp.begin(), mp.end());  // 按姓名从大到小输出
+
+    mp.Set("Tom", 78);  // 把所有名为"Tom"的学生的成绩都设置为78
+    Print(mp.begin(), mp.end());
+
+    MyMultimap<int, string, less<int>> mp2;
+    for (int i = 0; i < 5; ++i) mp2.insert(make_pair(s[i].score, s[i].name));
+
+    Print(mp2.begin(), mp2.end());  // 按成绩从小到大输出
+    mp2.Set(70, "Error");           // 把所有成绩为70的学生，名字都改为"Error"
+    Print(mp2.begin(), mp2.end());
+    cout << "******" << endl;
+
+    mp.clear();
+
+    string name;
+    string cmd;
+    int score;
+    while (cin >> cmd) {
+        if (cmd == "A") {
+            cin >> name >> score;
+            if (mp.find(name) != mp.end()) {
+                cout << "erroe" << endl;
+            }
+            mp.insert(make_pair(name, score));
+        } else if (cmd == "Q") {
+            cin >> name;
+            MyMultimap<string, int>::iterator p = mp.find(name);
+            if (p != mp.end()) {
+                cout << p->second << endl;
+            } else {
+                cout << "Not Found" << endl;
+            }
+        }
     }
     system("pause");
     return 0;

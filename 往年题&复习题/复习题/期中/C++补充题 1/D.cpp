@@ -5,22 +5,18 @@
 
 using namespace std;
 template <class T>
-void cmp(T x, int y) {
-    cout << 'a' << endl;
+void cmp(T& a, T b) {
+    cout << "a" << endl;
 }
-int k = 0;
-template <>
-void cmp<>(int a, int b) {
-    if (k % 2)
-        cout << 'b' << endl;
-    else {
-        k++;
-        cout << 'a' << endl;
-    }
-}
+
 template <class T>
-void cmp(T* a, int b) {
-    cout << 'c' << endl;
+void cmp(T a, T& b) {
+    cout << "b" << endl;
+}
+
+template <class T>
+void cmp(T* a, T& b) {
+    cout << "c" << endl;
 }
 // 在此处补充你的代码
 int main() {
