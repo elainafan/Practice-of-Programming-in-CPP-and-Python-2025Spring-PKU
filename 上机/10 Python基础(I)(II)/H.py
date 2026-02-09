@@ -1,12 +1,7 @@
 lst = input().split()
 r = int(lst[0])
 c = int(lst[1])
-ma = [[0]]
-for i in range(1, r + 2):
-    ma.append([0])
-for i in range(0, r + 2):
-    for j in range(1, c + 2):
-        ma[i].append(0)
+ma = [[0] * (c + 2) for _ in range(r + 2)]
 for i in range(1, r + 1):
     k = input().split()
     for j in range(0, c):
