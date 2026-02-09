@@ -2,9 +2,7 @@ lst = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
     'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ]
-cnt = []
-for i in range(0, 26):
-    cnt.append(0)
+cnt = [0] * 26
 for i in range(1, 5):
     k = input()
     for j in range(0, len(k)):

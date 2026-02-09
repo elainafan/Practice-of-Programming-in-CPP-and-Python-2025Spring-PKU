@@ -14,18 +14,14 @@ def dfs(x, y):
 
 
 n = int(input())
-ma = [[]]
-vis = [[]]
+ma = [[0] * (n + 1) for _ in range(n + 1)]
+vis = [[0] * (n + 1) for _ in range(n + 1)]
 dx = [0, 1, 0]
 dy = [0, 0, 1]
-for i in range(0, n):
-    ma.append([0])
-    vis.append([0])
 for i in range(1, n + 1):
     lst = input().split()
-    for j in range(0, n):
-        ma[i].append(int(lst[j]))
-        vis[i].append(0)
+    for j in range(1, n + 1):
+        ma[i][j] = int(lst[j - 1])
 vis[1][1] = 1
 flag = 0
 dfs(1, 1)

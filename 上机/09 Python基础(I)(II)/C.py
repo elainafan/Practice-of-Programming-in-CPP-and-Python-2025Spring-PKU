@@ -3,19 +3,11 @@ n = int(k[0])
 m = int(k[1])
 ans = 0
 ret = 0
-ma = [[]]
-for i in range(1, n + m + 1):
-    ma.append([0])
-for i in range(n + 1, n + m + 1):
-    for j in range(1, n + m + 1):
-        ma[i].append(0)
+ma = [[0] * (n + m + 1) for _ in range(n + m + 1)]
 for i in range(1, n + 1):
     t = input().split()
-    for j in range(0, n):
-        ma[i].append(int(t[j]))
-for i in range(1, n + 1):
-    for j in range(n + 1, n + m + 1):
-        ma[i].append(0)
+    for j in range(1, n + 1):
+        ma[i][j] = int(t[j - 1])
 for i in range(1, n + 1):
     for j in range(1, n + 1):
         temp = 0
