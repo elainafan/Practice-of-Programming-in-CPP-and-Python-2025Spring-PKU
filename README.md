@@ -4,6 +4,8 @@ Openjudge美化插件见[elainafan/Openjudge-Art](https://github.com/elainafan/O
 
 在阅读博文时有任何问题都可以在文章下方登录Github账号进行评论，作者看到会回。
 
+下面是作者关于课程的概况介绍以及学习经验。
+
 ## 前言
 此repo是北京大学《程序设计实习》课程的相关资料，作者于2025年春季学期选修了该门课程，授课教师为张勤健老师。
 
